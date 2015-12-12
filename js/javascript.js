@@ -82,7 +82,7 @@ function CalculateTimeDifferenceFor1600m(time) {
 
 
 // Variables
-var keepLooping = "true";
+var keepLooping = true;
 var moreEvents = "";
 var output = "";
 var quitMessage = "<p>Thank you for using this program!</p>";
@@ -133,11 +133,8 @@ while (keepLooping) {
         // End the loop OR continue.
         moreEvents = prompt("Would you like to check any other events? Please enter \"no\" or \"n\" to end the program.");
         if (moreEvents.toUpperCase() === "NO" || (moreEvents.toUpperCase() ==="N")) {
-          keepLooping = "false";
+          keepLooping = false;
           document.write(quitMessage);
-          // The program will not truly quit without the break below. I tested it several times and
-          // re-vistied unit6 to find a solution, but the example code would not work without this break.
-          break;
         }
       }
     }
