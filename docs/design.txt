@@ -1,0 +1,276 @@
+Problem Statement:
+A program is required to ask users to input how many track events they participate in. Based on how many track events the user enters (1-4), the program must then
+ask the user for each event name (Ex: 800m, 400m, 200m, et cetera) and their best time in that event. From the given information, the program must calculate how much time the
+user needs to take off from their best time in order to qualify for state. If the user's given time does qualify, display "Congratulations! Your time is fast enough to qualify for state!"
+Once calculated, display the user's given event,  time, the approximate time required to qualify for state, and the difference between the two.
+
+Example Display:
+Your event: 400m
+Fastest time: 53.6 seconds
+State Qualification time: ~52.8 seconds
+Time needed to drop: .8 seconds
+
+You need to drop approximately .8 seconds from your 400m time in order to qualify for state! Good luck!
+
+
+Nouns and Verbs.
+
+Nouns: users, track events, track events, user, program, user, event name, best time in event, information, program, user, best time, state, users given time, users given event,
+time, approximate time, difference between times
+
+Verbs: ask users to input, user enters, ask user for event name and best time, calculate users best time against state qualification time, if user qualifies display a congratulations message,
+if user does not qualify display given event, time, approx time for state, difference between the two.
+
+
+Defining Diagram:
+
+Inputs: Amount of events, what event, best time (in order)
+
+Processes: Calculate the difference between user best time and state qualification. If faster then qualification: Display congratulations message.
+           If slower then the state time: Display user time, user event, state qualification time, and the difference between the two.
+
+Outputs: ALWAYS output user event, user time, state qualification time. If qualified display congratulations your time is fast enough to qualify.
+         If not fast enough, display the difference between the state qualification time and user time with a good luck message.
+
+
+Solution Algorithim:
+
+TrackTimer
+  initialize keepLooping to "true"
+  initialize message to ""
+  initialize moreEvents to ""
+  initialize output to ""
+  initialize state100 to 11.2
+  initialize state200 to 22.4
+  initialize state400 to 52.8
+  initialize state800 to 128
+  initialize state1600 to 290
+  initialize stateQualification to 0
+  initialize timeDifference to 0
+  initialize userEvent to ""
+  initialize userTime to 0
+  WHILE (keeplooping)
+    prompt for userEvent with "What event would you like to check? Please enter the metric distance Ex: 400m"
+    IF (userEvent !== "100m") OR (userEvent !== "200m") OR (userEvent !== "400m") OR (userEvent !== "800m") OR (userEvent !== "1600m") THEN
+      output = "Please enter an event in the format given. Example: \"400m\""
+      display output
+    ELSE
+      prompt for userTime with "What is your fastest time in the " + userEvent + "? Please answer in seconds."
+      IF userTime.isNaN() THEN
+        output = "Please enter just numbers for time. EX: 4 minutes would be \"240\""
+        display output
+      ELSE
+        convert userTime to a number
+        IF userEvent = "100m" THEN
+          IF userTime <= state100 THEN
+            timeDifference = state100 - userTime
+            message = Congratulations! Your time in the 100 should allow you to qualify for state!
+            stateQualification = state100
+          ELSE
+            timeDifference = state100 - userTime
+            message = Keep training hard and hit those blocks!
+            stateQualification = state100
+          ENDIF
+        ELSE IF userEvent = "200m" THEN
+          IF userTime <= state200 THEN
+            timeDifference = state200 - userTime
+            message = Congratulations! Your time in the 200 should allow you to qualify for state!
+            stateQualification = state200
+          ELSE
+            timeDifference = state200 - userTime
+            message = Keep training hard and hit those blocks!
+            stateQualification = state200
+          ENDIF
+        ELSE IF userEvent = "400m" THEN
+          IF userTime <= state400 THEN
+            timeDifference = state400 - userTime
+            message = Congratulations! Your time in the 400 should allow you to qualify for state!
+            stateQualification = state400
+          ELSE
+            timeDifference = state400 - userTime
+            message = Keep training hard and hit those blocks!
+            stateQualification = state400
+          ENDIF
+        ELSE IF userEvent = "800m" THEN
+          IF userTime <= state800 THEN
+            timeDifference = state800 - userTime
+            message = Congratulations! Your time in the 800 should allow you to qualify for state!
+            stateQualification = state800
+          ELSE
+            timeDifference = state800 - userTime
+            message = Keep training hard and fastening that pace!
+            stateQualification = state800
+          ENDIF
+        ELSE
+          IF userTime <= state1600 THEN
+            timeDifference = state1600 - userTime
+            message = Congratulations! Your time in the 1600 should allow you to qualify for state!
+            stateQualification = state1600
+          ELSE
+            timeDifference = state1600 - userTime
+            message = Keep training hard and fastening that pace!
+            stateQualification = state1600
+          ENDIF
+        ENDIF
+        output = ("Your event: " + userEvent + "\nYour best time in the " + userEvent +": " + userTime + " seconds\n State Qualification time for the " + userEvent + ": " + stateQualification +
+        " seconds\nTime difference between your time and state time: " + timeDifference + " seconds.\n\n" + message)
+        display output
+        prompt for moreEvents with "Would you like to check another event? Please answer with \"Yes\" or \"No\""
+        IF moreEvents === "No" THEN
+          keeplooping = "false"
+        ENDIF
+      ENDLOOP
+    ENDIF
+  ENDIF
+END
+
+Test Plans:
+Variables: keepLooping, message, moreEvents, output, state100, state200, state400, state800, state1600, stateQualification, timeDifference, userEvent, userTime
+
+Test Plan 1
+  Input: userEvent = 100m, userTime = 14.0
+
+  Expected Result:
+  Your event: 100m
+  Your best time in the 100m: 14.0 seconds
+  State Qualification time for the 100m: 11.2 seconds
+  Time difference between your time and state time: 3.8 seconds
+
+  Keep training hard and hit those blocks!
+
+  Actual Result:
+  Your event: 100m
+
+  Your best time in the 100m: 14 seconds
+
+  State Qualification time in the 100m: 11.2 seconds
+
+  Time Difference: ~3 seconds (2.8000000000000007)
+
+  Keep training hard and hit those blocks!
+
+Test Plan 2
+  Input: userEvent = 100m, userTime = 11.0
+
+  Expected Result:
+  Your event: 100m
+  Your best time in the 100m: 11.0 seconds
+  State Qualification time for the 100m: 11.2 seconds
+  Time difference between your time and state time: -0.2 seconds
+
+  Congratulations! Your time in the 100m should allow you to qualify for state!
+
+  Actual Result:
+  Your event: 100m
+
+  Your best time in the 100m: 11 seconds
+
+  State Qualification time in the 100m: 11.2 seconds
+
+  Time Difference: ~0 seconds (-0.1999999999999993)
+
+  Congratulations! Your time in the 100 should allow you to qualify for state!
+
+
+
+Test Plan 3
+  Input: userEvent = 400, userTime = 60
+
+  Expected Result:
+  Please enter an event in the format given. Ex: 400m
+
+  Actual Result:
+  Please enter an event in the format given. Ex: 400m
+
+Test Plan 4
+  Input: userEvent = 400m, userTime = 60 seconds
+
+  Expected Result:
+  Please enter just numbers for time. EX: 4 minutes would be "240"
+
+  Actual Result:
+  Please enter justt numbers for time. EX: 4 minutes would be "240"
+
+Test Plan 5
+  Input: userEvent = 400m, userTime = 1500
+
+  Expected Result:
+  Your event: 400m
+  Your best time in the 400m: 1500 seconds
+  State Qualification time for the  400m: 52.8 seconds
+  Time difference between your time and state time: 1447.2 seconds
+
+  Keep training hard and hit those blocks!
+
+  Actual Result:
+  Please enter an event in the format given. Example: "400m"
+
+  Your event: 400m
+
+  Your best time in the 400m: 1500 seconds
+
+  State Qualification time in the 400m: 52.8 seconds
+
+  Time Difference: ~1448 seconds (1447.2)
+
+  Keep training hard and hit those blocks!
+
+Test Plan 6
+  Input: userEvent = 800m, userTime = 120
+
+  Expected Result:
+  Your event: 800m
+  Your best time in the 800m: 120 seconds
+  State Qualification time for the 800m: 128 seconds
+  Time difference between your time and state time: -8 seconds
+
+  Congratulations! Your time in the 800m should allow you to qualify for state!
+
+  Actual Result:
+  Your event: 800m
+
+  Your best time in the 800m: 120 seconds
+
+  State Qualification time in the 800m: 128 seconds
+
+  Time Difference: ~-8 seconds (-8)
+
+  Congratulations! Your time in the 800 should allow you to qualify for state!
+
+Test Plan 7
+  Input: userEvent = 800m, userTime = 140
+
+  Expected Result:
+  Your event: 800m
+  Your best time in the 800m: 140 seconds
+  State Qualification time for the 800m: 128 seconds
+  Time difference between your time and state time: 12 seconds
+
+  Keep training hard and fastening that pace!
+
+  Actual Result:
+  Your event: 800m
+
+  Your best time in the 800m: 140 seconds
+
+  State Qualification time in the 800m: 128 seconds
+
+  Time Difference: ~12 seconds (12)
+
+  Keep training hard and fastening that pace!
+
+
+
+ Test Plan 8
+  Input: userEvent = 100m, userTime = -10
+
+  Expected Result:
+  Your event: 100m
+  Your best time in the 100m: -10 seconds
+  State Qualification time for the 100m: 11.2 seconds
+  Time difference between your time and state time: -21.2
+
+  Congratulations! Your time in the 100m should allow you to qualify for state!
+
+  Actual Result:
+  Please enter a positive time. You cannot run a race in negative time!
